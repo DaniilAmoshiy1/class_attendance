@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Full List of Students</title>
+    </head>
+    <body>
+        <h1>Full List of Students</h1>
+        <ul>
+            {% for student in students %}
+                <li>{{ student.name }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">Back to Attendance Tracker</a>
+    </body>
+</html>

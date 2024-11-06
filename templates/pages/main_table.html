@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Tracker</title>
+</head>
+<body>
+    <h1>Attendance Tracker</h1>
+    <a href="/full_list_of_students">Full List of Students</a>
+    <a href="/add_new_student">You're not on this list? Add yourself!</a>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            {% for student in students %}
+                <th>{{ student.name }}</th>
+            {% endfor %}
+        </tr>
+        {% for date in dates %}
+            <tr>
+                <td>{{ date }}</td>
+                {% for student in students %}
+                    <td>{{ student.status }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
