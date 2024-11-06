@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Attendance Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <h1>Attendance Tracker</h1>
     <a href="/full_list_of_students">Full List of Students</a>
     <a href="/add_new_student">You're not on this list? Add yourself!</a>
+    <a href="/delete_student">You're want to delete student? Click here!</a>
+    <a href="/dates">All of dates</a>
     <table border="1">
         <tr>
-            <th>Date</th>
+            <th>Dates</th>
             {% for student in students %}
                 <th>{{ student.name }}</th>
             {% endfor %}

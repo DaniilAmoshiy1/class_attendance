@@ -3,6 +3,7 @@ from datetime import date, timedelta
 from fastapi import FastAPI, Request, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -27,11 +28,21 @@ students = [
 ]
 
 
-@app.get('/')
-def get_table(request: Request):
+def get_all_dates():
     today = date.today()
     next_saturday = today + timedelta(days=(5 - today.weekday()) % 7)
-    dates = [next_saturday + timedelta(days=i * 7) for i in range(6)]
+    end_of_year = date(today.year, 12, 31)
+    dates = []
+    current_date = next_saturday
+    while current_date <= end_of_year:
+        dates.append(current_date)
+        current_date += timedelta(days=7)
+    return dates
+
+
+@app.get('/')
+def get_table(request: Request):
+    dates = get_all_dates()
 
     return templates.TemplateResponse(
         'pages/main_table.html',
@@ -62,7 +73,7 @@ def get_students(request: Request):
 
 
 @app.get('/add_new_student')
-def add_student_page(request: Request):
+def get_add_student(request: Request):
     return templates.TemplateResponse(
         'pages/add_new_student.html',
         {
@@ -78,11 +89,58 @@ def add_student(request: Request, name: str = Form(...), status: str = Form(...)
         new_student = Structure_table(name=name, date=date.today(), status=status)
         students.append(new_student)
 
+    dates = get_all_dates()
+
     return templates.TemplateResponse(
         'pages/main_table.html',
         {
             'request': request,
             'students': students,
-            'dates': [date.today() + timedelta(days=i * 7) for i in range(6)]
+            'dates': dates
+        }
+    )
+
+
+@app.get('/delete_student')
+def get_delete_page(request: Request, error: str = None):
+    return templates.TemplateResponse(
+        'pages/delete_student.html',
+        {
+            'request': request,
+            'error': error
+        }
+    )
+
+
+@app.post('/delete_student')
+def delete_student(request: Request, name: str = Form(...)):
+    global students
+    if any(student.name == name for student in students):
+        students = [student for student in students if student.name != name]
+        dates = get_all_dates()
+        return templates.TemplateResponse(
+            'pages/main_table.html',
+            {
+                'request': request,
+                'students': students,
+                'dates': dates
+            }
+        )
+    else:
+        return RedirectResponse(
+            url=f'/delete_student?error=This is name not in table',
+            status_code=303
+        )
+
+
+@app.get('/dates')
+def get_dates(request: Request):
+    dates = get_all_dates()
+
+    return templates.TemplateResponse(
+        'pages/dates.html',
+        {
+            'request': request,
+            'dates': dates
         }
     )
