@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Update Student Status</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body>
+        <h1>Update Student Status</h1>
+
+        {% if error %}
+        <div style="color: red;">
+            Error: {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            <div>
+                <label for="name">Student Name:</label>
+                <select name="name" id="name" required>
+                    {% for _, student in students.items() %}
+                        <option value="{{ student }}">{{ student }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="date">Date:</label>
+                <select name="date_str" id="date" required>
+                    {% for date_id, date in dates.items() %}
+                        <option value="{{ date.strftime('%Y-%m-%d') }}">{{ date.strftime('%Y-%m-%d') }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="status">Status:</label>
+                <select name="status" id="status" required>
+                    <option value="none">None</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                </select>
+            </div>
+
+            <button type="submit">Update Status</button>
+        </form>
+
+        <a href="/">Back to Attendance Tracker</a>
+    </body>
+</html>

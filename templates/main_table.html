@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Attendance Tracker</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body>
+        <h1>Attendance Tracker</h1>
+            {% include "header.html" %}
+        <table border="1">
+            <tr>
+                <th>Date</th>
+                {% for _, student in students.items() %}
+                    <th>{{ student }}</th>
+                {% endfor %}
+            </tr>
+            {% for date_id, date in dates.items() %}
+            <tr>
+                <td>{{ date.strftime('%Y-%m-%d') }}</td>
+                {% for student_id, student in students.items() %}
+                    <td>
+                        {{ status_dict.get(student_id, {-1: "Student id not found"}).get(date_id, "Date id not
+                        found") }}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+<!--        <form class="reset-data-link" action="/reset_data" method="post">-->
+<!--            <button type="submit" class="reset-data-link">Reset database</button>-->
+<!--        </form>-->
+        <form class="delete-values-link" action="/delete_values" method="post">
+            <button type="submit" class="delete-values-link">Delete all values in tables</button>
+        </form>
+    </body>
+</html>

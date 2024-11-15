@@ -71,7 +71,7 @@ form {
 label {
     margin-bottom: 5px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     width: 100%;
 }
 
@@ -102,4 +102,29 @@ button:hover {
 p.error {
     color: red;
     margin-top: 10px;
+}
+/*.reset-data-link {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    color: red;
+    text: red;
+    text-decoration: none;
+}*/
+.delete-values-link {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    color: red;
+    text: red;
+    text-decoration: none;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
 }

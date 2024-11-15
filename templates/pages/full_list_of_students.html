@@ -8,8 +8,8 @@
     <body>
         <h1>Full List of Students</h1>
         <ul>
-            {% for student in students %}
-                <li>{{ student.name }}</li>
+            {% for _, student in students.items() %}
+                <li>{{ student }}</li>
             {% endfor %}
         </ul>
         <a href="/">Back to Attendance Tracker</a>

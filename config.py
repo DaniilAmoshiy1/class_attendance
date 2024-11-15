@@ -1,0 +1,3 @@
+INITIALIZATION: bool = False
+
+REDIRECT_CODE: int = 303
