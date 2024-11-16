@@ -18,7 +18,7 @@ python -m venv venv
 venv/Scripts/activate
 ```
 
-4, install requiremets:
+4, install requirements:
 ```bash
 pip install -r requirements.txt
 ```
