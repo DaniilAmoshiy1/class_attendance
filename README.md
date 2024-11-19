@@ -35,3 +35,15 @@ http://localhost:8000
 7, stop web page:
 
 In terminal, you need click Ctrl + C
+
+
+### Need to add/fix feature:
+
+reset_data:
+
+- [main.py](https://github.com/DaniilAmoshiy1/class_attendance/blob/main/main.py#L310)
+
+- [main_table.html](https://github.com/DaniilAmoshiy1/class_attendance/blob/main/templates/main_table.html#L30)
+
+- [style.css](https://github.com/DaniilAmoshiy1/class_attendance/blob/main/static/css/style.css#L106)
+
